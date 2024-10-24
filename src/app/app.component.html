@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <div class="header">
+    <img height="100" src="../assets/Google_Gemini_logo.svg" />
+  </div>
+  <div class="main" #scrollframe>
+  <div *ngFor="let result of questions; trackBy: trackByPrompt">
+    <div class="message user">
+      <div class="bubble user">{{ result.prompt }}</div>
+    </div>
+    <div class="message ia">
+      <div class="bubble ia" [innerHTML]="result.result"></div>
+    </div>
+  </div>
+</div>
+
+  <div class="footer">
+    <textarea [(ngModel)]="prompt" matInput placeholder="Enviar mensaje a la IA..."></textarea>
+    <button *ngIf="!writing" color="primary" aria-label="send" (click)="generate()" [disabled]="writing || !prompt.trim()">
+      Send
+    </button>    
+    <div *ngIf="writing" class="loader"></div>
+  </div>
+</div>
